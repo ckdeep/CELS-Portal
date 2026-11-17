@@ -1,0 +1,25 @@
+/* Admin > Schedule check: teacher hours and double bookings, worked out from the schedule files (assets/js/schedule-engine.js). */
+(function(){
+ const E=window.CELS;if(!E||!E.sched)return;
+ const S=E.sched,DAYN=["Monday","Tuesday","Wednesday","Thursday","Friday"],esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+ const md=d=>new Date(d+"T12:00:00").toLocaleDateString("en-US",{month:"short",day:"numeric"}),tr=(a,b)=>S.hm(a)+" to "+S.hm(b);
+ E.pages["admin/schedule-check"]=el=>{
+  const R=S.ranges();let rid=(R.find(r=>r.id==="nov")||R[0]).id,tf="";
+  const draw=()=>{const r=R.find(x=>x.id===rid),a=S.audit(r.from,r.to),rows=S.summary(r.from,r.to),T=S.teachers(),show=tf?rows.filter(x=>x.teacher===tf):rows;
+   const keys=["class","activity","ftOffered","ftBooked","ooOffered","ooBooked","committed","obligation"],tot={};keys.forEach(k=>tot[k]=Math.round(show.reduce((s,x)=>s+x[k],0)*100)/100);
+   const item=g=>`<div class="item"><b>${esc(g.teacher)}</b>, ${DAYN[g.day]} ${tr(g.from,g.to)}: ${esc(g.what)}<br><small>${g.dates.length} day${g.dates.length>1?"s":""}: ${g.dates.slice(0,6).map(md).join(", ")}${g.dates.length>6?", and "+(g.dates.length-6)+" more":""}</small></div>`;
+   const cl=a.clashes.filter(g=>!tf||g.teacher===tf),of=a.offered.filter(g=>!tf||g.teacher===tf);
+   let h=`<div class="panel"><h3>Teacher hours and double bookings</h3><div class="toolbar"><label class="f">Period<select id="sc_r">${R.map(x=>`<option value="${x.id}"${x.id===rid?" selected":""}>${esc(x.label)}</option>`).join("")}</select></label><label class="f">Teacher<select id="sc_t"><option value="">All teachers</option>${T.map(x=>`<option${x===tf?" selected":""}>${esc(x)}</option>`).join("")}</select></label><button class="btn alt" id="sc_csv">Download CSV</button></div>
+   <small>Worked out from the schedule files, with the bookings made in this browser. The Workload page reads the live database; compare the two after a term is imported.</small></div>`;
+   h+=`<div class="panel" style="border-left:6px solid ${cl.length?"#b3261e":"#2e8b57"}"><h3>Class and booking clashes</h3>${cl.length?cl.map(item).join(""):"<small>No teacher is booked twice at the same time in this period.</small>"}</div>`;
+   h+=`<div class="panel" style="border-left:6px solid ${of.length?"#e0a100":"#2e8b57"}"><h3>Open Free Talk / 1-on-1 times that overlap a class or activity</h3>${of.length?`<small>The booking pages hide these times and the hours below leave them out.</small>`+of.map(item).join(""):"<small>None.</small>"}</div>`;
+   if(a.unmatched.length&&!tf)h+=`<div class="panel"><h3>Names that match no teacher</h3><small>${a.unmatched.map(esc).join(", ")}: listed on an activity but not on any class or Free Talk list, so their hours are not counted.</small></div>`;
+   h+=`<table><tr><th>Teacher</th><th>Class hours</th><th>Activity hours</th><th>Free Talk offered</th><th>Free Talk booked</th><th>1-on-1 offered</th><th>1-on-1 booked</th><th>Committed</th><th>Obligation</th><th>Conflicts</th></tr>${show.map(x=>`<tr><td>${esc(x.teacher)}</td>${keys.map(k=>`<td>${x[k]}</td>`).join("")}<td>${x.conflicts?`<b style="color:#b3261e">${x.conflicts}</b>`:"0"}</td></tr>`).join("")}<tr><th>Total</th>${keys.map(k=>`<th>${tot[k]}</th>`).join("")}<th>${show.reduce((s,x)=>s+x.conflicts,0)}</th></tr></table>`;
+   h+=`<div class="panel"><h3>How hours are counted</h3><div class="item"><b>Class hours:</b> each class period (90 minutes in a regular module, 50 in the EEE program) on every class day in the period.</div><div class="item"><b>Activity hours:</b> EEE trips and volunteer activities that name the teacher.</div><div class="item"><b>Offered:</b> Free Talk (30 minutes) and 1-on-1 (50 minutes) times marked open on the Free Talk sheet, minus any that overlap a class or activity.</div><div class="item"><b>Booked:</b> sessions already booked, including the bookings noted on the sheet.</div><div class="item"><b>Committed</b> = class + activity + booked. <b>Obligation</b> = class + activity + offered. Curriculum and event hours are on the Workload page.</div></div>`;
+   if(tf){const ds=S.dates(r.from,r.to),rowsD=ds.flatMap(d=>S.busy(tf,d).map(x=>({d,x}))).sort((p,q)=>p.d<q.d?-1:p.d>q.d?1:p.x.s-q.x.s);
+    h+=`<div class="panel"><h3>${esc(tf)}: schedule in this period</h3>${rowsD.length?`<table><tr><th>Date</th><th>Time</th><th>Type</th><th>Details</th></tr>${rowsD.map(({d,x})=>`<tr><td>${DAYN[S.wd(d)].slice(0,3)} ${md(d)}</td><td>${tr(x.s,x.e)}</td><td>${esc(x.kind)}</td><td>${esc(x.label)}</td></tr>`).join("")}</table>`:"<small>Nothing scheduled.</small>"}</div>`}
+   el.innerHTML=h;
+   el.querySelector("#sc_r").onchange=e=>{rid=e.target.value;draw()};el.querySelector("#sc_t").onchange=e=>{tf=e.target.value;draw()};
+   el.querySelector("#sc_csv").onclick=()=>{const b=new Blob(["\ufeff"+S.csv(r.from,r.to)],{type:"text/csv"}),u=URL.createObjectURL(b),l=document.createElement("a");l.href=u;l.download="cels-teacher-hours-"+r.from+"-to-"+r.to+".csv";document.body.appendChild(l);l.click();l.remove();setTimeout(()=>URL.revokeObjectURL(u),500)}};
+  draw()};
+})();
