@@ -6,16 +6,25 @@ set:(k,v)=>{mem[k]=v;try{window.name=JSON.stringify(mem)}catch(e){}try{sessionSt
 clear:()=>{Object.keys(mem).forEach(k=>delete mem[k]);try{window.name=""}catch(e){}try{sessionStorage.clear()}catch(e){}}};
 const DAYS=["Monday","Tuesday","Wednesday","Thursday","Friday"];
 const toMin=t=>{const[a,b]=t.split(":");return+a*60+ +b},fmt=m=>{const h=Math.floor(m/60),mm=String(m%60).padStart(2,"0");return(h%12||12)+":"+mm+(h<12?" AM":" PM")};
-const O=window.CELS_OCT;const SB=window.CELS_SB||null;
-const course=id=>O.courses[id]?{id,...O.courses[id]}:null;
+/* Terms: October, November (Module E) and the December EEE weeks. O is the term in progress today (or the next one). */
+const TERMS=[].concat(window.CELS_OCT||[],window.CELS_NOV||[],window.CELS_DEC||[]).filter(Boolean);
+TERMS.forEach(t=>t.sections.forEach(s=>Object.defineProperty(s,"tm",{value:t})));
+const isoD=d=>d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");
+const termOf=d=>TERMS.find(t=>d>=t.start&&d<=t.end)||null;
+const openTerms=()=>TERMS.filter(t=>t.end>=isoD(new Date()));
+const O=termOf(isoD(new Date()))||TERMS.find(t=>t.start>isoD(new Date()))||TERMS[TERMS.length-1];
+const keyDates=()=>{const all=TERMS.flatMap(t=>t.dates).sort((a,b)=>a.date<b.date?-1:1),t=isoD(new Date()),up=all.filter(d=>d.date>=t);return up.length?up:all.slice(-3)};
+const legend=()=>{const seen=new Set(),out=[];(openTerms().length?openTerms():[O]).forEach(t=>t.legend.forEach(l=>{if(!seen.has(l[0])){seen.add(l[0]);out.push(l)}}));return out};
+const SB=window.CELS_SB||null;
+const course=id=>{const t=TERMS.find(x=>x.courses[id]);return t?{id,...t.courses[id]}:null};
 const allCourses=()=>Object.keys(O.courses).map(id=>({id,...O.courses[id],program:O.module,parts:[]}));
-const section=id=>O.sections.find(s=>s.id===id);
+const section=id=>{for(const t of TERMS){const s=t.sections.find(x=>x.id===id);if(s)return s}};
 const enrolled=u=>{const o=store.get("enr",{}),b=D.enrollments.filter(e=>e.user===u.id).map(e=>({section:e.section,status:(o[e.section]||{}).status||e.status}));Object.keys(o).forEach(k=>{if(o[k].user===u.id&&!b.some(x=>x.section===k))b.push({section:k,status:o[k].status})});return b};
-const slotsOf=cid=>{const r=[];O.grid.forEach((day,d)=>day.forEach((groups,p)=>{if(groups.some(g=>g.includes(cid)))r.push([d,p+1])}));return r};
-const classEvents=u=>enrolled(u).filter(e=>e.status==="active").flatMap(e=>{const s=section(e.section),c=O.courses[s.course];return slotsOf(s.course).map(([d,p])=>({title:c.name,weekday:d,start:O.periods[p][0],end:O.periods[p][1],type:"course",color:c.color,teacher:s.teacher,room:s.room,level:s.level,section:s.section,from:O.start,to:O.end}))});
-const events=u=>classEvents(u).concat(O.dates.map(d=>({title:d.label,date:d.date,allDay:true,type:"event"})),store.get("bookings",[]).filter(b=>b.user===u.id).map(b=>({title:b.label+(b.status==="pending_payment"?" (pending payment)":""),date:b.date,start:b.start,end:b.end,type:"appointment",kind:b.type,color:O.colors[b.type],teacher:b.provider,bid:b.id,pending:b.status==="pending_payment",locked:b.status==="booked"&&b.type==="one-on-one"})));
+const slotsOf=(cid,t)=>{t=t||O;const r=[];t.grid.forEach((day,d)=>day.forEach((groups,p)=>{if(groups.some(g=>g.includes(cid)))r.push([d,p+1])}));return r};
+const classEvents=u=>{const out=[],act=new Set();enrolled(u).filter(e=>e.status==="active").forEach(e=>{const s=section(e.section);if(!s)return;const t=s.tm,c=t.courses[s.course];act.add(t);slotsOf(s.course,t).forEach(([d,p])=>out.push({title:c.name,weekday:d,start:t.periods[p][0],end:t.periods[p][1],type:"course",color:c.color,teacher:s.teacher,room:s.room,level:s.level,section:s.section,from:t.start,to:t.end}))});act.forEach(t=>(t.acts||[]).forEach(a=>out.push({...a,color:a.color||"#e1ebf8"})));return out};
+const events=u=>classEvents(u).concat(TERMS.flatMap(t=>t.dates).map(d=>({title:d.label,date:d.date,allDay:true,type:"event"})),store.get("bookings",[]).filter(b=>b.user===u.id).map(b=>({title:b.label+(b.status==="pending_payment"?" (pending payment)":""),date:b.date,start:b.start,end:b.end,type:"appointment",kind:b.type,color:O.colors[b.type],teacher:b.provider,bid:b.id,pending:b.status==="pending_payment",locked:b.status==="booked"&&b.type==="one-on-one"})));
 const pages={};
-const E={sb:SB,C,D,O,store,DAYS,fmt,toMin,course,allCourses,section,enrolled,slotsOf,events,pages};
+const E={sb:SB,C,D,O,TERMS,termOf,openTerms,keyDates,legend,store,DAYS,fmt,toMin,course,allCourses,section,enrolled,slotsOf,events,pages};
 window.CELS=E;
 
 E.refreshBadge=()=>{const b=document.getElementById("bdg");if(!b)return;const n=E.unreadCount&&E.user?E.unreadCount(E.user):0;b.textContent=n>99?"99+":n;b.hidden=!n;b.setAttribute("aria-label",n+" unread messages")};
