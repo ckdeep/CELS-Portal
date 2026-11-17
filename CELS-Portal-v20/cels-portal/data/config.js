@@ -5,7 +5,7 @@ window.CELS_CONFIG={
  nav:{
   student:[["dashboard","Dashboard","🏠"],["courses","Courses","📚"],["calendar","Calendar","📅"],["inbox","Inbox","✉️"],["free-talk","Free Talk","💬"],["one-on-one","1-on-1","🧑‍🏫"],["student-buddy","Student Buddy","🤝"],["account","Account","👤"]],
   teacher:[["dashboard","Dashboard","🏠"],["courses","Courses","📚"],["calendar","Calendar","📅"],["inbox","Inbox","✉️"],["free-talk","Free Talk","💬"],["one-on-one","1-on-1","🧑‍🏫"],["activities","Activities & Events","🎉"],["forms","Forms & Requests","🗂️"],["account","Account","👤"]],
-  admin:[["dashboard","Dashboard","🏠"],["users","Users","👥"],["placement","Placement","🎯"],["ielts-program","IELTS","📖"],["courses","Courses","📚"],["content","Content","🗂️"],["enrollments","Enrollments","🧾"],["appointments","Appointments","📅"],["student-progress","Progress","📈"],["results","Results","✅"],["reports","Reports","📊"],["workload","Workload","🧮"],["messages","Messages","✉️"],["forms","Forms","📋"],["system-settings","Settings","⚙️"]]
+  admin:[["dashboard","Dashboard","🏠"],["users","Users","👥"],["placement","Placement","🎯"],["ielts-program","IELTS","📖"],["courses","Courses","📚"],["content","Content","🗂️"],["enrollments","Enrollments","🧾"],["appointments","Appointments","📅"],["student-progress","Progress","📈"],["results","Results","✅"],["reports","Reports","📊"],["workload","Workload","🧮"],["schedule-check","Schedule check","🛡️"],["alerts","Alerts","🔔"],["messages","Messages","✉️"],["forms","Forms","📋"],["system-settings","Settings","⚙️"]]
  },
  /* DEMO ONLY. Real authentication must happen on the server. */
  users:[
