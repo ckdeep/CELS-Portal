@@ -142,3 +142,20 @@ td.at-present:has(input:checked){background:#d9f2e3}td.at-late:has(input:checked
 .fs{border:1px solid var(--line);border-radius:10px;padding:10px 14px;margin:12px 0}.fs legend{font-weight:700;padding:0 6px}.chklist{max-height:180px;overflow:auto;border:1px solid var(--line);border-radius:6px;padding:6px 10px;display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:4px 12px}
 .req{color:#b3261e;font-weight:700}
 .frow{display:grid;grid-template-columns:2fr 120px 2fr auto auto;gap:8px;align-items:center;margin-bottom:8px}.frow input,.frow select{font:inherit;padding:7px 9px;border:1px solid var(--line);border-radius:6px}@media(max-width:860px){.frow{grid-template-columns:1fr}}
+
+/* Faculty photo badges and profile card (Free Talk / 1-on-1) */
+.fp-av{position:relative;overflow:hidden;cursor:pointer}
+.fp-av img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.fp-av:hover,.fp-av:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+.fp-big{width:84px;height:84px;font-size:26px;cursor:default}
+.fp-link{color:var(--accent);text-decoration:underline;cursor:pointer}
+.fp-ov{position:fixed;inset:0;background:rgba(20,30,40,.55);display:grid;place-items:center;z-index:1000;padding:16px}
+.fp-card{background:#fff;border-radius:14px;max-width:420px;width:100%;padding:22px;position:relative;box-shadow:0 12px 40px rgba(0,0,0,.25);max-height:90vh;overflow:auto}
+.fp-x{position:absolute;top:8px;right:12px;border:0;background:none;font-size:26px;line-height:1;cursor:pointer;color:var(--mute)}
+.fp-head{display:flex;gap:14px;align-items:center;margin-bottom:12px}.fp-head h3{margin:0 0 2px}
+.fp-role{color:var(--mute);font-weight:600}
+.fp-card h4{margin:12px 0 4px}.fp-card ul{margin:0;padding-left:18px}
+.fp-note{color:var(--mute)}
+.fp-acts{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+.fp-btn{display:inline-block;padding:8px 14px;border-radius:8px;background:var(--accent);color:#fff;text-decoration:none;font-weight:600}
+.fp-btn.alt{background:#fff;color:var(--accent);border:1px solid var(--accent)}
