@@ -1,0 +1,40 @@
+DUPLICATE section label in November class sheet: ecs B1 section B appears 2 times (Jay/316, Grace/309). Disambiguated with the sheet's own header, e.g. 'B (B1-A)'.
+DUPLICATE section label in November class sheet: ecs B1 section B appears 2 times (Jay/316, Grace/309). Disambiguated with the sheet's own header, e.g. 'B (B1-B)'.
+TEACHER CLASH (Nov): Elisa teaches gb A1-A and filipino FL-A-A at the same time (Mon P2)
+TEACHER CLASH (Nov): Elisa teaches gb A1-A and filipino FL-A-A at the same time (Wed P2)
+TEACHER CLASH (Nov): Elisa teaches gb A1-A and filipino FL-A-A at the same time (Thu P2)
+TEACHER CLASH (Nov): Elisa teaches gb A1-A and filipino FL-A-A at the same time (Fri P1)
+YEAR TYPO: 'Dropping of Classes Deadline' is stored as 2025-11-20 on the November sheet; treated as 2026-11-20 (a Friday).
+FREE TALK booking on the sheet: Denn, 2026-11-10, 13:00-13:30 (Yui) moved to the new session 12:50-13:20, the one it overlaps most.
+FREE TALK booking on the sheet: Jhon, 2026-11-11, 10:30-11:00 (Shiori) moved to the new session 10:40-11:10, the one it overlaps most.
+FREE TALK booking on the sheet: Kath, 2026-11-11, 08:30-09:00 (Ruri Ubukata) moved to the new session 08:30-09:00, the one it overlaps most.
+FREE TALK booking on the sheet: Kath, 2026-11-11, 09:10-09:40 (SAAKA) moved to the new session 09:00-09:30, the one it overlaps most.
+FREE TALK booking on the sheet: Marijo, 2026-11-11, 10:30-11:00 (Yui) moved to the new session 10:40-11:10, the one it overlaps most.
+FREE TALK booking on the sheet: Zel, 2026-11-11, 09:10-09:40 (SABATA) moved to the new session 09:00-09:30, the one it overlaps most.
+FREE TALK booking on the sheet: JJ, 2026-11-12, 10:30-11:00 (Yui) moved to the new session 10:40-11:10, the one it overlaps most.
+FREE TALK booking on the sheet: Jhon, 2026-11-12, 10:30-11:00 (Shiori) moved to the new session 10:40-11:10, the one it overlaps most.
+FREE TALK booking on the sheet: Grace, 2026-11-13, 10:30-11:00 (Shiori) moved to the new session 10:40-11:10, the one it overlaps most.
+FREE TALK booking on the sheet: Jing, 2026-11-13, 10:30-11:00 (Shiori) moved to the new session 10:40-11:10, the one it overlaps most.
+FREE TALK booking on the sheet: Marijo, 2026-11-13, 08:30-09:00 (Yui) moved to the new session 08:30-09:00, the one it overlaps most.
+FREE TALK booking on the sheet: Shiela, 2026-11-13, 14:20-14:50 (Riho) moved to the new session 14:30-15:00, the one it overlaps most.
+FREE TALK booking on the sheet: Jing, 2026-11-16, 10:30-11:00 (Yui) moved to the new session 10:40-11:10, the one it overlaps most.
+FREE TALK booking on the sheet: Denn, 2026-11-17, 13:00-13:30 (Yui) moved to the new session 12:50-13:20, the one it overlaps most.
+FREE TALK booking on the sheet: Shi, 2026-11-17, 09:10-09:40 (Iori) moved to the new session 09:00-09:30, the one it overlaps most.
+FREE TALK booking on the sheet: Marijo, 2026-11-18, 10:30-11:00 (Yui) moved to the new session 10:40-11:10, the one it overlaps most.
+FREE TALK booking on the sheet: Dyne, 2026-11-19, 09:10-09:40 (Iori) moved to the new session 09:00-09:30, the one it overlaps most.
+FREE TALK booking on the sheet: JJ, 2026-11-19, 10:30-11:00 (Yui) moved to the new session 10:40-11:10, the one it overlaps most.
+FREE TALK booking on the sheet: Jing, 2026-11-20, 08:30-09:00 (Yui) moved to the new session 08:30-09:00, the one it overlaps most.
+FREE TALK booking on the sheet: Jing, 2026-11-23, 10:30-11:00 (Yui) moved to the new session 10:40-11:10, the one it overlaps most.
+FREE TALK layout: 3 sessions per period (8:30-10:00, 10:10-11:40, 12:50-14:20, 14:30-16:00). 226 sessions (15:00 to 16:00) have no entry on the sheet and are open only because the teacher is not teaching then; please confirm teachers really offer Free Talk in the afternoon.
+DECEMBER: the sheet labels three rows 'PERIOD 5' (14:00-14:50, 15:10-16:00, 16:10-17:00). Treated as periods 5, 6 and the 1-on-1/Buddy slot 16:10-17:00; the 17:10-18:00 row (labelled PERIOD 6) is the second 1-on-1/Buddy slot.
+DECEMBER: dates are written 'Dec 7, 2025' etc. Treated as 2026 (Dec 7, 2026 is a Monday; Dec 7, 2025 is a Sunday).
+DECEMBER: rows 40-56 of 'December Program' (6 University students, Dec 14-16) say 'no need to create new classes'; no entries were created for them.
+DECEMBER week 1 TEACHER MISMATCH: Filipino Food Culture group 2 is 'MyMy' on 'December Program' but 'JJ' on 'EEE-Dec Timetable'. Used 'MyMy' (Program).
+DECEMBER week 1: Island Hopping says '2 TEACHER VOLUNTEERS (Kath)' but names only one teacher; only Kath is shown.
+DECEMBER: no Free Talk / 1-on-1 teacher availability exists for Dec 7-18 in the workbook (FT11-NOVEMBER covers Nov 9 - Dec 4). Only Student Buddy (no teacher needed) is bookable on those dates. Nothing was invented.
+DECEMBER: nothing in the workbook covers Dec 21 onward.
+Teacher 'Cha' teaches a November class but has no column on FT11-NOVEMBER (no Free Talk availability).
+Teacher 'James' teaches a November class but has no column on FT11-NOVEMBER (no Free Talk availability).
+Teacher 'Zie' teaches a November class but has no column on FT11-NOVEMBER (no Free Talk availability).
+FT11-NOVEMBER has 35 teacher columns; 22 dated booking notes imported as pre-booked slots.
+Sections / meeting rows per import file: {"nov": [52, 52], "dec1": [12, 18], "dec2": [12, 18]}
